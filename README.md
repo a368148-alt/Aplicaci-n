@@ -1,6 +1,6 @@
 # EcoAprende
 Aprende los tipos de energías renovables (Solar, eólica, hidráulica, geotérmica y biomasa) de una manera sencilla.
-
+![](https://energygreen.uy/wp-content/uploads/2022/09/0.jpeg)
 
 # Entonces, ¿Qué son las energías renovables?
 
@@ -27,5 +27,5 @@ Las energías renovables son aquellas obtenidas de fuentes naturales que se rege
 
 **Energía geotérmica: Aprovecha el calor del subsuelo. 
 
-#  Entonces, ¿Qué energías usamos en Chihuahua?
+
 
