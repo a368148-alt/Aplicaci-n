@@ -1,6 +1,6 @@
 # EcoAprende
 Aprende los tipos de energías renovables (Solar, eólica, hidráulica, geotérmica y biomasa) de una manera sencilla.
-![](<img width="960" height="640" alt="image" src="https://github.com/user-attachments/assets/7cc61a77-9e4b-4bf8-ab3e-986b8acacdaf" />)
+
 
 # Entonces, ¿Qué son las energías renovables?
 
