@@ -149,8 +149,7 @@ def mostrar_leccion_solar():
     with col_imagen:
         st.image("https://images.unsplash.com/photo-1509391007205-d143c7b80b2a", 
                  caption="Paneles Solares Fotovoltaicos", use_column_width=True)
-        st.video("https://youtu.be/J-p4j11H7y8", caption="Video explicativo simple (Ejemplo)")
-
+        
     if st.button("⬅️ Volver al Dashboard", key='back_solar'):
         st.session_state['pagina'] = 'dashboard'
         st.rerun()
@@ -169,7 +168,7 @@ if 'solar_completado' not in st.session_state:
 if st.session_state['pagina'] == 'dashboard':
     mostrar_dashboard()
 elif st.session_state['pagina'] == 'solar':
-    mostrar_leccion_solar()
+  
 elif st.session_state['pagina'] == 'dashboard_update':
 
     if st.session_state.get('solar_completado'):
