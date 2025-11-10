@@ -169,17 +169,12 @@ if st.session_state['pagina'] == 'dashboard':
     mostrar_dashboard()
 if st.session_state['pagina'] == 'inicio':
     
-# Cambiar 'elif' por 'if' si es la primera comprobación en tu script.
 if st.session_state['pagina'] == 'solar':
-    # Aquí debe ir el código para mostrar el contenido o cuestionario "Solar"
     st.write("Cargando la sección Solar...") 
-    # ... otras funciones para cargar la página
-
+    
 elif st.session_state['pagina'] == 'dashboard_update':
-    # Este 'elif' ahora es válido porque sigue a un 'if'
+    
     if st.session_state.get('solar_completado'):
-        # ... el resto de la lógica de actualización del dashboard
-        pass
     
 elif st.session_state['pagina'] == 'dashboard_update':
 
