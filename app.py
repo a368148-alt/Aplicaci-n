@@ -170,6 +170,7 @@ if st.session_state['pagina'] == 'dashboard':
 if st.session_state['pagina'] == 'inicio':
     
 if st.session_state['pagina'] == 'solar':
+    
     st.write("Cargando la sección Solar...") 
     
 elif st.session_state['pagina'] == 'dashboard_update':
