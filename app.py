@@ -167,9 +167,11 @@ if 'solar_completado' not in st.session_state:
 
 if st.session_state['pagina'] == 'dashboard':
     mostrar_dashboard()
- 
-  
- elif st.session_state['pagina'] == 'dashboard_update':
+if st.session_state['pagina'] == 'inicio':
+    
+elif st.session_state['pagina'] == 'solar':
+    
+elif st.session_state['pagina'] == 'dashboard_update':
 
     if st.session_state.get('solar_completado'):
         progreso["Solar"]["completado"] = True
