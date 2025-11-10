@@ -7,23 +7,20 @@ st.set_page_config(
     layout="wide"
 )
 
-# --- INICIALIZACIÓN DE ESTADO (CRÍTICO: Guarda la persistencia de datos) ---
-
-# 1. Inicializa la página por defecto
 if 'pagina' not in st.session_state:
     st.session_state['pagina'] = 'dashboard'
 
-# 2. Inicializa la estructura de progreso en el estado de sesión
+
 if 'progreso' not in st.session_state:
     st.session_state['progreso'] = {
-        # Nota: Cambiado a False y 0 para que el usuario pueda ganar puntos
+       
         "Solar": {"completado": False, "puntaje": 0}, 
         "Eolica": {"completado": False, "puntaje": 0},
         "Hidraulica": {"completado": False, "puntaje": 0},
         "Biomasa": {"completado": False, "puntaje": 0},
     }
 
-# --- FUNCIONES DE APOYO ---
+
 
 def calcular_resumen():
     """Calcula y devuelve las métricas del dashboard leyendo desde st.session_state."""
@@ -34,7 +31,7 @@ def calcular_resumen():
     return total_lecciones, lecciones_completadas, insignias, progreso_actual
 
 
-# --- PÁGINAS DE LA APLICACIÓN ---
+
 
 def mostrar_dashboard():
     """Pantalla Principal: Dashboard del Estudiante."""
@@ -56,7 +53,7 @@ def mostrar_dashboard():
     cols1 = st.columns(2)
     cols2 = st.columns(2)
     
-    # Lección Solar
+    
     with cols1[0]:
         color = "green" if progreso["Solar"]["completado"] else "orange"
         st.markdown(f"""
@@ -69,7 +66,7 @@ def mostrar_dashboard():
             st.session_state['pagina'] = 'solar'
             st.rerun()
 
-    # Lección Eólica (AHORA HABILITADA)
+    
     with cols1[1]:
         color = "green" if progreso["Eolica"]["completado"] else "blue"
         st.markdown(f"""
@@ -78,11 +75,11 @@ def mostrar_dashboard():
             <p>Aprovecha la fuerza del viento. Puntaje: {progreso["Eolica"]["puntaje"]}</p>
         </div>
         """, unsafe_allow_html=True)
-        if st.button('Iniciar Lección', key='eolica_btn', use_container_width=True): # Removido disabled=True
+        if st.button('Iniciar Lección', key='eolica_btn', use_container_width=True): 
             st.session_state['pagina'] = 'eolica'
             st.rerun()
 
-    # Lección Hidráulica (AHORA HABILITADA)
+   
     with cols2[0]:
         color = "green" if progreso["Hidraulica"]["completado"] else "cyan"
         st.markdown(f"""
@@ -91,11 +88,11 @@ def mostrar_dashboard():
             <p>La potencia del agua en movimiento. Puntaje: {progreso["Hidraulica"]["puntaje"]}</p>
         </div>
         """, unsafe_allow_html=True)
-        if st.button('Iniciar Lección', key='hidraulica_btn', use_container_width=True): # Removido disabled=True
+        if st.button('Iniciar Lección', key='hidraulica_btn', use_container_width=True): 
             st.session_state['pagina'] = 'hidraulica'
             st.rerun()
 
-    # Mini Juegos (AHORA HABILITADO)
+    
     with cols2[1]:
         st.markdown(f"""
         <div style="background-color: #e0e0e0; padding: 20px; border-radius: 10px; border-left: 5px solid purple;">
@@ -103,7 +100,7 @@ def mostrar_dashboard():
             <p>¡Pon a prueba lo aprendido! (Desbloquea una insignia)</p>
         </div>
         """, unsafe_allow_html=True)
-        if st.button('Jugar Ahora', key='juegos_btn', use_container_width=True): # Removido disabled=True
+        if st.button('Jugar Ahora', key='juegos_btn', use_container_width=True): 
             st.session_state['pagina'] = 'minijuegos'
             st.rerun()
         
@@ -132,11 +129,11 @@ def mostrar_leccion_solar():
         Grandes proyectos como parques solares aprovechan esta ventaja para la generación a gran escala.
         """)
         
-        # --- CUESTIONARIO ---
+        
         with st.expander("❓ Cuestionario Rápido: Energía Solar"):
             st.write("¡Responde para ganar 10 Puntos Ecológicos!")
             
-            # CRÍTICO: Usar keys para guardar las respuestas en st.session_state
+            
             respuesta1 = st.radio(
                 "1. ¿Qué tipo de energía solar genera electricidad directamente?",
                 ('Solar Térmica', 'Solar Fotovoltaica', 'Solar Geotérmica'),
@@ -152,18 +149,17 @@ def mostrar_leccion_solar():
             if st.button("Enviar Respuestas", key='quiz_solar'):
                 puntaje = 0
                 
-                # CRÍTICO: Acceder a las respuestas desde st.session_state (aunque st.radio lo hace automáticamente)
-                # La lógica de Streamlit asegura que estas variables mantengan su valor al hacer click en el botón.
+               
                 if respuesta1 == 'Solar Fotovoltaica':
                     puntaje += 5
                 if respuesta2 == 'Reduce las emisiones de CO2':
                     puntaje += 5
                     
-                # Guardar el puntaje en el estado de la sesión
+               
                 st.session_state['solar_completado'] = True
                 st.session_state['solar_puntaje'] = puntaje
                 
-                # Transicionar a la página de actualización
+               
                 st.session_state['pagina'] = 'dashboard_update' 
                 st.rerun()
 
@@ -176,7 +172,6 @@ def mostrar_leccion_solar():
         st.rerun()
 
 
-# --- NUEVAS FUNCIONES PLACEHOLDER (Para Eólica, Hidráulica y Mini Juegos) ---
 
 def mostrar_leccion_eolica():
     """Contenido placeholder para la Lección de Energía Eólica."""
@@ -204,62 +199,60 @@ def mostrar_mini_juegos():
     if st.button("⬅️ Volver al Dashboard", key='back_juegos'):
         st.session_state['pagina'] = 'dashboard'
         st.rerun()
-# --------------------------------------------------------------------------
+
 
 def mostrar_dashboard_update():
     """Lógica de actualización de progreso después de completar una lección."""
     
-    # CRÍTICO: Leer el diccionario de progreso desde el estado de sesión
+    
     progreso = st.session_state['progreso']
 
-    # Lógica que aplica a Solar (y podría extenderse a otras lecciones)
+   
     if st.session_state.get('solar_completado'):
-        # 1. Actualizar el progreso PERSISTENTE
+        
         puntaje_obtenido = st.session_state.get('solar_puntaje', 0)
         
         progreso["Solar"]["completado"] = True
         progreso["Solar"]["puntaje"] = puntaje_obtenido
         
-        # 2. Mensaje de éxito
+       
         st.success(f"¡Cuestionario completado! Ganaste **{progreso['Solar']['puntaje']}** Puntos Ecológicos.")
         st.balloons()
         
-        # 3. Mostrar botón para continuar
+        
         if st.button("Continuar al Dashboard"):
-            # Limpiamos las variables temporales de la lección
+            
             del st.session_state['solar_completado']
             del st.session_state['solar_puntaje']
             st.session_state['pagina'] = 'dashboard'
             st.rerun()
             
     else:
-        # En caso de que se llegue aquí por error
+       
         st.warning("No se completó la lección. Volviendo al dashboard...")
         st.button("Volver al Dashboard", on_click=lambda: st.session_state.update(pagina='dashboard'))
 
 
-# --- LÓGICA DE NAVEGACIÓN PRINCIPAL (Añadidas las nuevas páginas) ---
 
-# Usamos una cadena if/elif para asegurar que solo una página se renderice a la vez
 if st.session_state['pagina'] == 'dashboard':
     mostrar_dashboard()
 
 elif st.session_state['pagina'] == 'solar':
     mostrar_leccion_solar()
 
-elif st.session_state['pagina'] == 'eolica': # Nueva página
+elif st.session_state['pagina'] == 'eolica': 
     mostrar_leccion_eolica()
 
-elif st.session_state['pagina'] == 'hidraulica': # Nueva página
+elif st.session_state['pagina'] == 'hidraulica': 
     mostrar_leccion_hidraulica()
 
-elif st.session_state['pagina'] == 'minijuegos': # Nueva página
+elif st.session_state['pagina'] == 'minijuegos': 
     mostrar_mini_juegos()
     
 elif st.session_state['pagina'] == 'dashboard_update':
     mostrar_dashboard_update()
     
-# Cualquier otro estado
+
 else:
     st.session_state['pagina'] = 'dashboard'
     st.rerun()
